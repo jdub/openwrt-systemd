@@ -1,0 +1,24 @@
+# systemd package config
+
+menu "Configuration"
+	depends on PACKAGE_systemd
+
+config SYSTEMD_ENABLE_KDBUS
+	bool "Enable kdbus support"
+	default n
+	help
+	  Connect to kdbus by default
+
+config SYSTEMD_ENABLE_BLKID
+	bool "Enable blkid support"
+	default n
+	help
+	  Enable blkid support
+
+config SYSTEMD_ENABLE_MYHOSTNAME
+	bool "Enable nss-myhostname support"
+	default n
+	help
+	  Enable nss-myhostname support
+
+endmenu
