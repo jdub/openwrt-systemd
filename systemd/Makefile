@@ -96,7 +96,7 @@ endef
 define Package/systemd
 $(call Package/systemd/Default)
   TITLE+= (daemon)
-  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +libcap +glib2 +agetty
+  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +@BUSYBOX_DEFAULT_SULOGIN +libcap +glib2 +agetty
   MENU:=1
 endef
 
@@ -255,11 +255,7 @@ define Package/systemd/install
 		$(1)/usr/share/dbus-1/services/.
 
 	$(INSTALL_DIR) $(1)/var/log/journal
-
 	$(INSTALL_DIR) $(1)/etc/systemd/system/getty.target.wants
-	ln -sf \
-		/usr/lib/systemd/system/getty@.service \
-		$(1)/etc/systemd/system/getty.target.wants/getty@tty1.service
 
 	ln -sf \
 		/usr/lib/systemd/system/multi-user.target \
