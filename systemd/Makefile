@@ -96,7 +96,7 @@ endef
 define Package/systemd
 $(call Package/systemd/Default)
   TITLE+= (daemon)
-  DEPENDS:=+@KERNEL_CGROUPS +libcap +agetty
+  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +libcap +glib2
   MENU:=1
 endef
 
