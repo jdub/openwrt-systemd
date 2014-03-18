@@ -260,6 +260,11 @@ define Package/systemd/install
 	ln -sf \
 		/usr/lib/systemd/system/multi-user.target \
 		$(1)/etc/systemd/system/default.target
+
+	$(INSTALL_DIR) $(1)/sbin
+	ln -sf \
+		/usr/lib/systemd/systemd \
+		$(1)/sbin/init
 endef
 
 define Package/systemd-udev-hwdb/install
