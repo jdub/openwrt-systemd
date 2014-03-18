@@ -95,6 +95,16 @@ SYSTEMD_SYSTEM_TARGETS = \
 	time-sync.target \
 	umount.target
 
+SYSTEMD_SYSTEM_SOCKETS = \
+	syslog.socket \
+	systemd-initctl.socket \
+	systemd-journald.socket \
+	systemd-shutdownd.socket
+
+SYSTEMD_SYSTEM_PATHS = \
+	systemd-ask-password-console.path \
+	systemd-ask-password-wall.path
+
 SYSTEMD_SYSTEM_SERVICES = \
 	autovt@.service \
 	console-getty.service \

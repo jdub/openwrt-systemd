@@ -96,7 +96,7 @@ endef
 define Package/systemd
 $(call Package/systemd/Default)
   TITLE+= (daemon)
-  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +libcap +glib2
+  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +libcap +glib2 +agetty
   MENU:=1
 endef
 
@@ -221,6 +221,8 @@ define Package/systemd/install
 		$(addprefix $(PKG_INSTALL_DIR)/usr/lib/systemd/system/, \
 			$(SYSTEMD_SYSTEM_TARGET_WANTS) \
 			$(SYSTEMD_SYSTEM_TARGETS) \
+			$(SYSTEMD_SYSTEM_SOCKETS) \
+			$(SYSTEMD_SYSTEM_PATHS) \
 			$(SYSTEMD_SYSTEM_SERVICES) \
 			$(SYSTEMD_SYSTEM_MOUNTS)) \
 		$(1)/usr/lib/systemd/system
