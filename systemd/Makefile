@@ -28,6 +28,10 @@ SYSTEMD_DISABLE_PKG = $(if $(CONFIG_PACKAGE_systemd-$(1)),,--disable-$(2))
 CONFIGURE_ARGS += \
 	--prefix=/usr \
 	--sysconfdir=/etc \
+	--with-dbuspolicydir=/etc/dbus-1/system.d \
+	--with-dbussessionservicedir=/usr/share/dbus-1/services \
+	--with-dbussystemservicedir=/usr/share/dbus-1/system-services \
+	--with-dbusinterfacedir=/usr/share/dbus-1/interfaces \
 	--without-python \
 	--enable-compat-libs \
 	--disable-tests \
