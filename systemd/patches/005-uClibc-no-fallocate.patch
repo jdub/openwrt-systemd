@@ -1,7 +1,7 @@
-Index: systemd-211/src/journal/journal-file.c
+Index: systemd-218/src/journal/journal-file.c
 ===================================================================
---- systemd-211.orig/src/journal/journal-file.c
-+++ systemd-211/src/journal/journal-file.c
+--- systemd-218.orig/src/journal/journal-file.c
++++ systemd-218/src/journal/journal-file.c
 @@ -38,6 +38,8 @@
  #include "compress.h"
  #include "fsprg.h"
@@ -46,10 +46,10 @@ Index: systemd-211/src/journal/journal-file.c
          if (fstat(f->fd, &f->last_stat) < 0)
                  return -errno;
  
-Index: systemd-211/src/journal/journald-kmsg.c
+Index: systemd-218/src/journal/journald-kmsg.c
 ===================================================================
---- systemd-211.orig/src/journal/journald-kmsg.c
-+++ systemd-211/src/journal/journald-kmsg.c
+--- systemd-218.orig/src/journal/journald-kmsg.c
++++ systemd-218/src/journal/journald-kmsg.c
 @@ -441,6 +441,7 @@ fail:
  
  int server_open_kernel_seqnum(Server *s) {

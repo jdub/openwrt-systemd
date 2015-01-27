@@ -1,7 +1,7 @@
-Index: systemd-211/src/nspawn/nspawn.c
+Index: systemd-218/src/nspawn/nspawn.c
 ===================================================================
---- systemd-211.orig/src/nspawn/nspawn.c
-+++ systemd-211/src/nspawn/nspawn.c
+--- systemd-218.orig/src/nspawn/nspawn.c
++++ systemd-218/src/nspawn/nspawn.c
 @@ -98,6 +98,8 @@ typedef enum LinkJournal {
          LINK_GUEST
  } LinkJournal;
