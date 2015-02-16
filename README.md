@@ -1,17 +1,42 @@
-This project has been forked from aport's openwrt-systemd
-<url>https://github.com/aport/openwrt-systemd.git</url>
+# systemd for OpenWrt
 
-I will, to the best of my abilities, try to maintain the implementation of systemd on openwrt.
+An experimental, unholy union of systemd and OpenWrt.
 
-What is systemd?
-Systemd is a suite of system management daemons, libraries, and utilities designed as a central management and configuration platform for the Linux computer operating system.
-        Much like launchd for Mac OS X it tries to parellalize as many resources at boot in order to speedup boot times.
 
-Why am I doing this?
-I'm new to much of open source and free software, then again I'm also new to software in general. My goal is to, one day, mainline systemd as an optional init system for OpenWRT. I have seen the advantages of systemd in performance, manageability, and ease of use, thus I would like to incorporate systemd fuctionality to Openwrt and, for the hardware that can support it, produce real world performance gains.
+## Requirements
 
-State of implementation:
+- You must use eglibc as your C library, as systemd requires (e)glibc and will not work with uClibc!
 
-Aport's original iplementation was 211 since, as he described it, "This became a much simpler task with recent versions of systemd since they dropped the cyclic dependency on libdbus". However the project got very little attention and aport decided to abandon plans of maintaining it. I have forked the project and look to both mainline systemd to the openwrt trunk and to keep systemd well supported and updated! 
+- I have included some supporting OpenWrt patches for things we depend on that are not available in OpenWrt yet, including:
+  - `openwrt-kernel-config.patch` adds OpenWrt kernel config options required by systemd (by @aport)
+  - `openwrt-base-files.patch` avoids some conflicts between `base-files` and `systemd`
 
-So far with the lastest update to trunk (specifically glib2) and updating aport's original 211 to 218 had yeilded an error somewhere near libgio is depended on libmodule.2.0. I have, as of 01-26-2015, yet to find a solution but I will dedicate time to solve this. Any help is appreciated, and if someone is more knowledgable I would be willing to transfer ownership of the project. 
+
+## Getting Started
+
+- Add the following to `feeds.conf.default`:
+
+	src-git systemd https://github.com/jdub/openwrt-systemd.git
+
+- Run:
+
+	./scripts/feeds update systemd
+	./scripts/feeds install systemd
+	make menuconfig
+
+- Enable "Advanced configuration options (for developers)" and navigate into that menu.
+
+- Enable "Toolchain options" and navigate into that menu.
+
+- Under "C Library implementation", choose "eglibc".
+
+- At the top of the menu tree, under "Base system", you'll find "systemd" package!
+
+- Enable "systemd-udev-hwdb" and "systemd-modules-load" for a more useful system. :-)
+
+
+## Contributors
+
+- Adam @aport Porter
+- Gabe @thagabe Rodriguez
+- Jeff @jdub Waugh

@@ -1,0 +1,30 @@
+Terrible hacks to avoid conflicts between base-files and systemd.
+
+Requires further discussion with upstream, not a patch submission!
+
+Signed-off-by: Jeff Waugh <jdub at bethesignal.org>
+---
+ Makefile |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/package/base-files/Makefile b/package/base-files/Makefile
+index e0bf915..6f42f11 100644
+--- a/package/base-files/Makefile
++++ b/package/base-files/Makefile
+@@ -29,7 +29,6 @@ endif
+ define Package/base-files
+   SECTION:=base
+   CATEGORY:=Base system
+-  DEPENDS:=+netifd +libc +procd +jsonfilter
+   TITLE:=Base filesystem for OpenWrt
+   URL:=http://openwrt.org/
+   VERSION:=$(PKG_RELEASE)-$(REVISION)
+@@ -135,7 +134,7 @@ define Package/base-files/install
+ 	mkdir -p $(1)/root
+ 	$(LN) /proc/mounts $(1)/etc/mtab
+ 	rm -f $(1)/var
+-	$(LN) /tmp $(1)/var
++	#$(LN) /tmp $(1)/var
+ 	mkdir -p $(1)/etc
+ 	$(LN) /tmp/resolv.conf /tmp/fstab /tmp/TZ $(1)/etc/
+ 

@@ -1,0 +1,34 @@
+Add support for DEVTMPFS, DEVTMPFS_MOUNT, and FHANDLE.
+These are needed for systemd.
+
+Signed-off-by: Jeff Waugh <jdub at bethesignal.org>
+Signed-off-by: Adam Porter <porter.adam at gmail.com>
+---
+ config/Config-kernel.in | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/config/Config-kernel.in b/config/Config-kernel.in
+index c253959..84081c4 100644
+--- a/config/Config-kernel.in
++++ b/config/Config-kernel.in
+@@ -12,6 +12,19 @@ config KERNEL_DEBUG_FS
+ 	  debugging files into. Enable this option to be able to read and
+ 	  write to these files.
+ 
++config KERNEL_DEVTMPFS_MOUNT
++	bool "Mount devtempfs by default"
++	default n
++
++config KERNEL_DEVTMPFS
++	bool "Compile the kernel with devtmpfs enabled"
++	default n
++	select KERNEL_DEVTMPFS_MOUNT
++
++config KERNEL_FHANDLE
++	bool "Compile the kernel with support for fhandle syscalls"
++	default n
++
+ config KERNEL_PERF_EVENTS
+ 	bool
+ 	default n
+
