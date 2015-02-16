@@ -61,9 +61,21 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libkmod.pc $(1)/usr/lib/pkgconfig/
 endef
 
+LEGACY_BINARIES:= \
+	depmod \
+	insmod \
+	lsmod \
+	modinfo \
+	modprobe \
+	rmmod
+
 define Package/kmod/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(CP) $(PKG_INSTALL_DIR)/usr/bin/kmod $(1)/usr/bin/
+	$(INSTALL_DIR) $(1)/sbin
+	$(CP) $(PKG_INSTALL_DIR)/usr/bin/kmod $(1)/sbin/
+
+	for b in $(LEGACY_BINARIES); do \
+		ln -sf kmod $(1)/sbin/$$b ; \
+	done
 endef
 
 define Package/libkmod/install
