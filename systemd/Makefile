@@ -8,18 +8,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=systemd
-PKG_VERSION:=211
+PKG_VERSION:=218
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://www.freedesktop.org/software/systemd/
-PKG_MD5SUM:=0a70c382b6089526f98073b4ee85ef75
+PKG_MD5SUM:=4e2c511b0a7932d7fc9d79822273aac6
 
 PKG_BUILD_DEPENDS:=intltool/host gperf/host glib2/host
 
 include systemd-common.mk
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/kernel.mk
+include $(INCLUDE_DIR)/version.mk
 
 PKG_INSTALL=1
 
@@ -37,15 +37,12 @@ CONFIGURE_ARGS += \
 	--disable-tests \
 	--disable-apparmor \
 	--disable-efi \
-	--disable-multi-seat-x \
 	--disable-gtk-doc-html \
 	--disable-introspection \
-	--disable-blkid \
 	--disable-ima \
 	--disable-chkconfig \
 	--disable-selinux \
 	--disable-xz \
-	--disable-tcpwrap \
 	--disable-pam \
 	--disable-acl \
 	--disable-xattr \
@@ -56,9 +53,19 @@ CONFIGURE_ARGS += \
 	--disable-microhttpd \
 	--disable-polkit \
 	--disable-manpages \
+	--disable-smack \
+	--disable-elfutils \
+	--disable-firstboot \
+	--disable-gnutls \
+	--disable-libcurl \
+	--disable-hibernate \
+	--disable-gudev \
+	--disable-resolved \
+	--disable-seccomp \
+	--disable-sysusers \
+	--disable-timesyncd \
 	$(if $(CONFIG_SYSTEMD_ENABLE_KDBUS),--enable-kdbus) \
 	$(if $(CONFIG_SYSTEMD_ENABLE_MYHOSTNAME),,--disable-myhostname) \
-	$(if $(CONFIG_SYSTEMD_ENABLE_BLKID),,--disable-blkid) \
 	$(call SYSTEMD_DISABLE_PKG,backlight,backlight) \
 	$(call SYSTEMD_DISABLE_PKG,binfmt,binfmt) \
 	$(call SYSTEMD_DISABLE_PKG,bootchart,bootchart) \
@@ -96,7 +103,7 @@ endef
 define Package/systemd
 $(call Package/systemd/Default)
   TITLE+= (daemon)
-  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +@BUSYBOX_DEFAULT_SULOGIN +libcap +glib2 +agetty
+  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +@BUSYBOX_DEFAULT_SULOGIN +libcap +glib2 +agetty +libmount @USE_EGLIBC
   MENU:=1
 endef
 
@@ -154,7 +161,7 @@ endef
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libudev.so* $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libgudev-1.0.so* $(1)/usr/lib
+#	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libgudev-1.0.so* $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libsystemd.so* $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libsystemd-*.so* $(1)/usr/lib
 
@@ -437,7 +444,7 @@ define Plugin/udevd/install
 
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libudev.so* $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libgudev-1.0.so* $(1)/usr/lib
+#	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libgudev-1.0.so* $(1)/usr/lib
 
 	$(INSTALL_DIR) $(1)/usr/lib/systemd/system
 	$(CP) \
@@ -467,10 +474,8 @@ endef
 define Plugin/vconsole-setup/install
 endef
 
-#$(eval $(call SystemdBuildBin,tmpfiles,tmpfiles support,))
-
 $(eval $(call SystemdBuildLib,backlight,backlight tools,))
-$(eval $(call SystemdBuildLib,binfmt, binfmt tool,))
+$(eval $(call SystemdBuildLib,binfmt,binfmt tool,))
 $(eval $(call SystemdBuildLib,bootchart,bootchart tool,))
 $(eval $(call SystemdBuildLib,coredump,coredump hook,))
 $(eval $(call SystemdBuildLib,hostnamed,hostname daemon,))
@@ -484,7 +489,8 @@ $(eval $(call SystemdBuildLib,random-seed,randomseed tools,))
 $(eval $(call SystemdBuildLib,readahead,readahead tools,))
 $(eval $(call SystemdBuildLib,rfkill,rfkill tools,))
 $(eval $(call SystemdBuildLib,timedated,timedate daemon,))
-$(eval $(call SystemdBuildLib,udevd,device manager,+glib2))
+$(eval $(call SystemdBuildBin,tmpfiles,tmpfiles support,))
+$(eval $(call SystemdBuildLib,udevd,device manager,))
 $(eval $(call SystemdBuildLib,vconsole-setup,vconsole tool,))
 
 $(eval $(call BuildPackage,systemd))

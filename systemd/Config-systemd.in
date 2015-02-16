@@ -9,12 +9,6 @@ config SYSTEMD_ENABLE_KDBUS
 	help
 	  Connect to kdbus by default
 
-config SYSTEMD_ENABLE_BLKID
-	bool "Enable blkid support"
-	default n
-	help
-	  Enable blkid support
-
 config SYSTEMD_ENABLE_MYHOSTNAME
 	bool "Enable nss-myhostname support"
 	default n

@@ -42,13 +42,12 @@ SYSTEMD_SYSTEM_TARGET_WANTS = \
 	runlevel5.target.wants \
 	multi-user.target.wants \
 	local-fs.target.wants \
-	busnames.target.wants \
 	sysinit.target.wants
+#	busnames.target.wants \
 
 SYSTEMD_SYSTEM_TARGETS = \
 	basic.target \
 	bluetooth.target \
-	busnames.target \
 	emergency.target \
 	final.target \
 	getty.target \
@@ -94,11 +93,14 @@ SYSTEMD_SYSTEM_TARGETS = \
 	timers.target \
 	time-sync.target \
 	umount.target
+#	busnames.target \
 
 SYSTEMD_SYSTEM_SOCKETS = \
 	syslog.socket \
 	systemd-initctl.socket \
 	systemd-journald.socket \
+	systemd-journald-audit.socket \
+	systemd-journald-dev-log.socket \
 	systemd-shutdownd.socket
 
 SYSTEMD_SYSTEM_PATHS = \
@@ -117,6 +119,7 @@ SYSTEMD_SYSTEM_SERVICES = \
 	initrd-cleanup.service \
 	initrd-parse-etc.service \
 	initrd-switch-root.service \
+	ldconfig.service \
 	quotaon.service \
 	rc-local.service \
 	rescue.service \
@@ -128,8 +131,10 @@ SYSTEMD_SYSTEM_SERVICES = \
 	systemd-halt.service \
 	systemd-initctl.service \
 	systemd-journald.service \
+	systemd-journal-catalog-update.service \
 	systemd-journal-flush.service \
 	systemd-kexec.service \
+	systemd-machine-id-commit.service \
 	systemd-nspawn@.service \
 	systemd-poweroff.service \
 	systemd-reboot.service \
@@ -137,6 +142,7 @@ SYSTEMD_SYSTEM_SERVICES = \
 	systemd-shutdownd.service \
 	systemd-suspend.service \
 	systemd-sysctl.service \
+	systemd-update-done.service \
 	systemd-update-utmp-runlevel.service \
 	systemd-update-utmp.service \
 	user@.service
@@ -152,6 +158,7 @@ SYSTEMD_SYSTEM_MOUNTS = \
 SYSTEMD_UDEV_SYSTEM_SERVICES = \
 	initrd-udevadm-cleanup-db.service \
 	systemd-udevd.service \
+	systemd-udev-hwdb-update.service \
 	systemd-udev-settle.service \
 	systemd-udev-trigger.service
 
