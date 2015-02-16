@@ -279,6 +279,9 @@ define Package/systemd/install
 
 	$(CP) ./files/* $(1)/
 	$(VERSION_SED) $(1)/etc/os-release
+
+	$(INSTALL_DIR) $(1)/run
+	ln -sf /run $(1)/var/run
 endef
 
 define Package/systemd-udev-hwdb/install
