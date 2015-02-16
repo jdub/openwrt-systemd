@@ -8,7 +8,7 @@ An experimental, unholy union of systemd and OpenWrt.
 - You must use eglibc as your C library, as systemd requires (e)glibc and will not work with uClibc!
 
 - I have included some supporting OpenWrt patches for things we depend on that are not available in OpenWrt yet, including:
-  - `openwrt-kernel-config.patch` adds OpenWrt kernel config options required by systemd (by @aport)
+  - `openwrt-kernel-config.patch` adds OpenWrt kernel config options required by systemd ([originally](https://lists.openwrt.org/pipermail/openwrt-devel/2014-March/024291.html) by openwrt-systemd creator, Adam Porter)
   - `openwrt-base-files.patch` avoids some conflicts between `base-files` and `systemd`
 
 
@@ -16,13 +16,17 @@ An experimental, unholy union of systemd and OpenWrt.
 
 - Add the following to `feeds.conf.default`:
 
-	src-git systemd https://github.com/jdub/openwrt-systemd.git
+```
+src-git systemd https://github.com/jdub/openwrt-systemd.git
+```
 
 - Run:
 
-	./scripts/feeds update systemd
-	./scripts/feeds install systemd
-	make menuconfig
+```
+./scripts/feeds update systemd
+./scripts/feeds install systemd
+make menuconfig
+```
 
 - Enable "Advanced configuration options (for developers)" and navigate into that menu.
 
@@ -37,6 +41,6 @@ An experimental, unholy union of systemd and OpenWrt.
 
 ## Contributors
 
-- Adam @aport Porter
-- Gabe @thagabe Rodriguez
-- Jeff @jdub Waugh
+- Jeff [@jdub](https://github.com/jdub) Waugh, current maintainer
+- Gabe [@thagabe](https://github.com/thagabe) Rodriguez
+- Adam [@aport](https://github.com/aport) Porter, creator
