@@ -118,6 +118,8 @@ define Package/systemd/config
 endef
 
 define Package/systemd/conffiles
+/etc/hostname
+/etc/machine-id
 /etc/systemd/system.conf
 /etc/systemd/user.conf
 endef
@@ -272,6 +274,9 @@ define Package/systemd/install
 	ln -sf \
 		/usr/lib/systemd/systemd \
 		$(1)/sbin/init
+
+	$(CP) ./files/* $(1)/
+	$(VERSION_SED) $(1)/etc/os-release
 endef
 
 define Package/systemd-udev-hwdb/install
