@@ -74,7 +74,7 @@ define Package/kmod/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/bin/kmod $(1)/sbin/
 
 	for b in $(LEGACY_BINARIES); do \
-		ln -sf kmod $(1)/sbin/$$b ; \
+		ln -sf kmod $(1)/sbin/$$$$b ; \
 	done
 endef
 
