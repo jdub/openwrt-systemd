@@ -1,4 +1,6 @@
 #
+# Copyright (C) 2006-2103 OpenWrt.org
+# Copyright (C) 2014 Adam Porter
 # Copyright (C) 2015 Gabe Rodriguez, Jeff Waugh
 #
 # This is free software, licensed under the GNU General Public License v2.
