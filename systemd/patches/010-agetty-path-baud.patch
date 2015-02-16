@@ -1,0 +1,48 @@
+diff -Nrup systemd-218.orig/units/console-getty.service.m4.in systemd-218/units/console-getty.service.m4.in
+--- systemd-218.orig/units/console-getty.service.m4.in	2013-12-18 09:21:28.159729831 -0800
++++ systemd-218/units/console-getty.service.m4.in	2015-02-15 21:48:20.437058659 -0800
+@@ -15,7 +15,7 @@ After=rc-local.service
+ Before=getty.target
+ 
+ [Service]
+-ExecStart=-/sbin/agetty --noclear --keep-baud console 115200,38400,9600 $TERM
++ExecStart=-/usr/sbin/agetty --noclear --keep-baud console 115200,57600,38400,9600 $TERM
+ Type=idle
+ Restart=always
+ RestartSec=0
+diff -Nrup systemd-218.orig/units/container-getty@.service.m4.in systemd-218/units/container-getty@.service.m4.in
+--- systemd-218.orig/units/container-getty@.service.m4.in	2014-12-08 17:11:59.720865793 -0800
++++ systemd-218/units/container-getty@.service.m4.in	2015-02-15 21:48:32.153059031 -0800
+@@ -17,7 +17,7 @@ IgnoreOnIsolate=yes
+ ConditionPathExists=/dev/pts/%I
+ 
+ [Service]
+-ExecStart=-/sbin/agetty --noclear --keep-baud pts/%I 115200,38400,9600 $TERM
++ExecStart=-/usr/sbin/agetty --noclear --keep-baud pts/%I 115200,57600,38400,9600 $TERM
+ Type=idle
+ Restart=always
+ RestartSec=0
+diff -Nrup systemd-218.orig/units/getty@.service.m4 systemd-218/units/getty@.service.m4
+--- systemd-218.orig/units/getty@.service.m4	2014-06-16 17:43:43.878882549 -0700
++++ systemd-218/units/getty@.service.m4	2015-02-15 21:43:36.501049638 -0800
+@@ -27,7 +27,7 @@ ConditionPathExists=/dev/tty0
+ 
+ [Service]
+ # the VT is cleared by TTYVTDisallocate
+-ExecStart=-/sbin/agetty --noclear %I $TERM
++ExecStart=-/usr/sbin/agetty --noclear %I $TERM
+ Type=idle
+ Restart=always
+ RestartSec=0
+diff -Nrup systemd-218.orig/units/serial-getty@.service.m4 systemd-218/units/serial-getty@.service.m4
+--- systemd-218.orig/units/serial-getty@.service.m4	2014-12-04 16:26:51.853977211 -0800
++++ systemd-218/units/serial-getty@.service.m4	2015-02-15 21:48:08.673058285 -0800
+@@ -22,7 +22,7 @@ Before=getty.target
+ IgnoreOnIsolate=yes
+ 
+ [Service]
+-ExecStart=-/sbin/agetty --keep-baud 115200,38400,9600 %I $TERM
++ExecStart=-/usr/sbin/agetty --login-program /bin/ash --login-options "--login" --skip-login --keep-baud 115200,57600,38400,9600 %I $TERM
+ Type=idle
+ Restart=always
+ UtmpIdentifier=%I
