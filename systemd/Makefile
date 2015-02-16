@@ -80,7 +80,6 @@ CONFIGURE_ARGS += \
 	$(call SYSTEMD_DISABLE_PKG,networkd,networkd) \
 	$(call SYSTEMD_DISABLE_PKG,quotacheck,quotacheck) \
 	$(call SYSTEMD_DISABLE_PKG,random-seed,randomseed) \
-	$(call SYSTEMD_DISABLE_PKG,readahead,readahead) \
 	$(call SYSTEMD_DISABLE_PKG,rfkill,rfkill) \
 	$(call SYSTEMD_DISABLE_PKG,timedated,timedated) \
 	$(call SYSTEMD_DISABLE_PKG,tmpfiles,tmpfiles) \
@@ -400,13 +399,6 @@ define Plugin/random-seed/install
 		$(1)/usr/lib/systemd/system/sysinit.target.wants/.
 endef
 
-define Plugin/readahead/install
-	$(INSTALL_DIR) $(1)/usr/lib/systemd/system
-	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/lib/systemd/system/systemd-readahead-*.service \
-		$(1)/usr/lib/systemd/system
-endef
-
 define Plugin/rfkill/install
 	$(INSTALL_DIR) $(1)/usr/lib/systemd/system
 	$(CP) \
@@ -496,7 +488,6 @@ $(eval $(call SystemdBuildLib,modules-load,module loader,+libkmod))
 $(eval $(call SystemdBuildLib,networkd,network daemon,))
 $(eval $(call SystemdBuildLib,quotacheck,quotacheck tools,))
 $(eval $(call SystemdBuildLib,random-seed,randomseed tools,))
-$(eval $(call SystemdBuildLib,readahead,readahead tools,))
 $(eval $(call SystemdBuildLib,rfkill,rfkill tools,))
 $(eval $(call SystemdBuildLib,timedated,timedate daemon,))
 $(eval $(call SystemdBuildBin,tmpfiles,tmpfiles support,))
