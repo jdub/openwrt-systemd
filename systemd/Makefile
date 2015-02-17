@@ -23,7 +23,7 @@ include systemd-common.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/version.mk
 
-PKG_INSTALL=1
+PKG_INSTALL:=1
 
 SYSTEMD_DISABLE_PKG = $(if $(CONFIG_PACKAGE_systemd-$(1)),,--disable-$(2))
 
