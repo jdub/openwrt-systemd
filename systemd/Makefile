@@ -10,12 +10,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=systemd
-PKG_VERSION:=218
+PKG_VERSION:=219
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://www.freedesktop.org/software/systemd/
-PKG_MD5SUM:=4e2c511b0a7932d7fc9d79822273aac6
+PKG_MD5SUM:=e0d6c9a4b4f69f66932d2230298c9a34
 
 PKG_BUILD_DEPENDS:=intltool/host gperf/host glib2/host
 
