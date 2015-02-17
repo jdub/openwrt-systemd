@@ -27,44 +27,48 @@ PKG_INSTALL:=1
 
 SYSTEMD_DISABLE_PKG = $(if $(CONFIG_PACKAGE_systemd-$(1)),,--disable-$(2))
 
+CONFIGURE_ARGS_FAST_BUILD = \
+	--disable-gtk-doc \
+	--disable-gtk-doc-html \
+	--disable-manpages \
+	--disable-tests \
+	--without-python
+
+CONFIGURE_ARGS_EMBEDDED = \
+	--disable-efi \
+	--disable-firstboot \
+	--disable-hibernate \
+	--disable-hwdb \
+	--disable-importd \
+	--disable-microhttpd \
+	--disable-pam \
+	--disable-qrencode \
+	--disable-sysusers \
+	--enable-compat-libs
+
 CONFIGURE_ARGS += \
 	--prefix=/usr \
 	--sysconfdir=/etc \
-	--with-dbuspolicydir=/etc/dbus-1/system.d \
-	--with-dbussessionservicedir=/usr/share/dbus-1/services \
-	--with-dbussystemservicedir=/usr/share/dbus-1/system-services \
-	--with-dbusinterfacedir=/usr/share/dbus-1/interfaces \
-	--without-python \
-	--enable-compat-libs \
-	--disable-tests \
+	$(CONFIGURE_ARGS_FAST_BUILD) \
+	$(CONFIGURE_ARGS_EMBEDDED) \
 	--disable-apparmor \
-	--disable-efi \
-	--disable-gtk-doc-html \
 	--disable-introspection \
-	--disable-ima \
+	--disable-gudev \
 	--disable-chkconfig \
+	--disable-ima \
 	--disable-selinux \
-	--disable-xz \
-	--disable-pam \
-	--disable-acl \
-	--disable-xattr \
-	--disable-gcrypt \
+	--disable-seccomp \
 	--disable-audit \
-	--disable-libcryptsetup \
-	--disable-qrencode \
-	--disable-microhttpd \
-	--disable-polkit \
-	--disable-manpages \
 	--disable-smack \
+	--disable-xz \
+	--disable-acl \
+	--disable-gcrypt \
+	--disable-libcryptsetup \
+	--disable-polkit \
 	--disable-elfutils \
-	--disable-firstboot \
 	--disable-gnutls \
 	--disable-libcurl \
-	--disable-hibernate \
-	--disable-gudev \
 	--disable-resolved \
-	--disable-seccomp \
-	--disable-sysusers \
 	--disable-timesyncd \
 	$(if $(CONFIG_SYSTEMD_ENABLE_KDBUS),--enable-kdbus) \
 	$(if $(CONFIG_SYSTEMD_ENABLE_MYHOSTNAME),,--disable-myhostname) \
