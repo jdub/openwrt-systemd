@@ -36,8 +36,6 @@ make menuconfig
 
 - At the top of the menu tree, under "Base system", you'll find "systemd" package!
 
-- Enable "systemd-udev-hwdb" and "systemd-modules-load" for a more useful system. :-)
-
 
 ## Contributors
 
