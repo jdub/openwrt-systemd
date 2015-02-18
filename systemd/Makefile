@@ -38,9 +38,10 @@ CONFIGURE_ARGS_EMBEDDED = \
 	--disable-efi \
 	--disable-firstboot \
 	--disable-hibernate \
-	--disable-nls \
+	--disable-hwdb \
 	--disable-importd \
 	--disable-microhttpd \
+	--disable-nls \
 	--disable-pam \
 	--disable-qrencode \
 	--disable-sysusers \
@@ -108,7 +109,7 @@ endef
 define Package/systemd
 $(call Package/systemd/Default)
   TITLE+= (daemon)
-  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +@BUSYBOX_DEFAULT_SULOGIN +libcap +glib2 +agetty +libmount +PACKAGE_systemd-modules-load:libkmod +libiptc @USE_EGLIBC
+  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +@BUSYBOX_DEFAULT_SULOGIN +libcap +agetty +libmount +libiptc +dbus @USE_EGLIBC
   MENU:=1
 endef
 
@@ -141,7 +142,6 @@ $(call Package/systemd/description/Default)
 endef
 
 define SystemdBuildLib
-
   define Package/systemd-$(1)
     $(call Package/systemd/Default)
     TITLE+= $(2)
