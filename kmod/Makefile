@@ -15,6 +15,8 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://www.kernel.org/pub/linux/utils/kernel/kmod/
 PKG_MD5SUM:=a08643f814aa4efc12211c6e5909f4d9
 PKG_MAINTAINER:=Jeff Waugh <jdub@bethesignal.org>
+PKG_LICENSE:=LGPL-2.1+
+PKG_LICENSE_FILES:=COPYING
 
 PKG_INSTALL:=1
 
@@ -23,42 +25,23 @@ include $(INCLUDE_DIR)/package.mk
 CONFIGURE_ARGS += --with-zlib
 
 define Package/kmod/Default
-  SECTION:=base
-  CATEGORY:=Base system
+  SECTION:=utils
+  CATEGORY:=Utilities
   TITLE:=Linux kernel module handling
   URL:=https://www.kernel.org/pub/linux/utils/kernel/kmod/
   DEPENDS:=+zlib
 endef
 
+
 define Package/kmod
 $(call Package/kmod/Default)
   TITLE+= (tools)
-  DEPENDS+=+libkmod
 endef
 
 define Package/kmod/description
 Linux kernel module handling
  kmod is a set of tools to handle common tasks with Linux kernel modules like
  insert, remove, list, check properties, resolve dependencies and aliases.
-endef
-
-define Package/libkmod
-$(call Package/kmod/Default)
-  SECTION:=libs
-  CATEGORY:=Libraries
-  TITLE+= (library)
-endef
-
-
-define Build/InstallDev
-	$(INSTALL_DIR) $(1)/usr/include
-	$(CP) $(PKG_INSTALL_DIR)/usr/include $(1)/usr/
-
-	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libkmod.{so*,la} $(1)/usr/lib/
-
-	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libkmod.pc $(1)/usr/lib/pkgconfig/
 endef
 
 LEGACY_BINARIES:= \
@@ -71,16 +54,36 @@ LEGACY_BINARIES:= \
 
 define Package/kmod/install
 	$(INSTALL_DIR) $(1)/sbin
-	$(CP) $(PKG_INSTALL_DIR)/usr/bin/kmod $(1)/sbin/
+	$(CP) $(PKG_INSTALL_DIR)/usr/bin/kmod $(1)/sbin
 
 	for b in $(LEGACY_BINARIES); do \
 		ln -sf kmod $(1)/sbin/$$$$b ; \
 	done
 endef
 
+
+define Package/libkmod
+$(call Package/kmod/Default)
+  SECTION:=libs
+  CATEGORY:=Libraries
+  TITLE+= (library)
+endef
+
 define Package/libkmod/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libkmod.so.* $(1)/usr/lib/
+endef
+
+
+define Build/InstallDev
+	$(INSTALL_DIR) $(1)/usr/include
+	$(CP) $(PKG_INSTALL_DIR)/usr/include $(1)/usr/
+
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libkmod.{so*,la} $(1)/usr/lib/
+
+	$(INSTALL_DIR) $(1)/usr/lib/pkgconfig
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/pkgconfig/libkmod.pc $(1)/usr/lib/pkgconfig/
 endef
 
 
