@@ -38,7 +38,6 @@ CONFIGURE_ARGS_EMBEDDED = \
 	--disable-efi \
 	--disable-firstboot \
 	--disable-hibernate \
-	--disable-hwdb \
 	--disable-importd \
 	--disable-microhttpd \
 	--disable-nls \
