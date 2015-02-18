@@ -17,7 +17,7 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://www.freedesktop.org/software/systemd/
 PKG_MD5SUM:=e0d6c9a4b4f69f66932d2230298c9a34
 
-PKG_BUILD_DEPENDS:=intltool/host gperf/host glib2/host
+PKG_BUILD_DEPENDS:=intltool/host gperf/host
 
 include systemd-common.mk
 include $(INCLUDE_DIR)/package.mk
@@ -38,7 +38,7 @@ CONFIGURE_ARGS_EMBEDDED = \
 	--disable-efi \
 	--disable-firstboot \
 	--disable-hibernate \
-	--disable-hwdb \
+	--disable-nls \
 	--disable-importd \
 	--disable-microhttpd \
 	--disable-pam \
@@ -94,9 +94,9 @@ TARGET_CFLAGS += --std=gnu99
 define Package/systemd/Default
   SECTION:=base
   CATEGORY:=Base system
-  TITLE:=System manager
+  TITLE:=System and Service Manager
   URL:=http://www.freedesktop.org/wiki/Software/systemd/
-  MAINTAINER:=Adam Porter <porter.adam@gmail.com>
+  MAINTAINER:=Jeff Waugh <jdub@bethesignal.org>
 endef
 
 define Package/systemd/description/Default
