@@ -109,7 +109,7 @@ endef
 define Package/systemd
 $(call Package/systemd/Default)
   TITLE+= (daemon)
-  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +@BUSYBOX_DEFAULT_SULOGIN +libcap +agetty +libmount +libiptc +dbus @USE_EGLIBC
+  DEPENDS:=+@KERNEL_CGROUPS +@KERNEL_DEVTMPFS +@KERNEL_FHANDLE +@BUSYBOX_DEFAULT_SULOGIN +libcap +agetty +libmount +PACKAGE_systemd-modules-load:libkmod +libiptc +dbus @USE_EGLIBC
   MENU:=1
 endef
 
