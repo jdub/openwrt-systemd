@@ -1,28 +1,35 @@
-Add support for DEVTMPFS, DEVTMPFS_MOUNT, and FHANDLE.
-These are needed for systemd.
+Add support for various kernel options required by systemd.
+c.f. http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/sys-apps/systemd/systemd-9999.ebuild?&view=markup#l118
 
 Signed-off-by: Jeff Waugh <jdub at bethesignal.org>
 Signed-off-by: Adam Porter <porter.adam at gmail.com>
 ---
- config/Config-kernel.in | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ config/Config-kernel.in |   20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
 diff --git a/config/Config-kernel.in b/config/Config-kernel.in
-index c253959..84081c4 100644
+index a0bd13e..33d1e3c 100644
 --- a/config/Config-kernel.in
 +++ b/config/Config-kernel.in
-@@ -12,6 +12,19 @@ config KERNEL_DEBUG_FS
- 	  debugging files into. Enable this option to be able to read and
- 	  write to these files.
+@@ -26,6 +26,26 @@ config KERNEL_DEBUG_FS
+ 	  write to these files. Many common debugging facilities, such as
+ 	  ftrace, require the existence of debugfs.
  
 +config KERNEL_DEVTMPFS_MOUNT
-+	bool "Mount devtempfs by default"
++	bool
 +	default n
 +
 +config KERNEL_DEVTMPFS
 +	bool "Compile the kernel with devtmpfs enabled"
 +	default n
 +	select KERNEL_DEVTMPFS_MOUNT
++
++config KERNEL_BLK_DEV_BSG
++	bool "Compile the kernel with SG v4 support for any block device"
++	default n
++
++config KERNEL_FANOTIFY
++	bool "Compile the kernel with modern file notification support"
 +
 +config KERNEL_FHANDLE
 +	bool "Compile the kernel with support for fhandle syscalls"
@@ -31,4 +38,3 @@ index c253959..84081c4 100644
  config KERNEL_PERF_EVENTS
  	bool
  	default n
-
