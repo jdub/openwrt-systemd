@@ -11,8 +11,8 @@ SYSTEMD_BIN = \
 	systemd-detect-virt \
 	systemd-machine-id-setup \
 	systemd-notify \
-	systemd-nspawn \
 	systemd-run \
+	systemd-sysusers \
 	systemd-tty-ask-password-agent
 
 SYSTEMD_LIB = \
@@ -30,8 +30,7 @@ SYSTEMD_LIB = \
 	systemd-shutdownd \
 	systemd-sleep \
 	systemd-socket-proxyd \
-	systemd-sysctl \
-	systemd-update-utmp
+	systemd-sysctl
 
 SYSTEMD_SYSTEM_TARGET_WANTS = \
 	sockets.target.wants \
@@ -43,7 +42,6 @@ SYSTEMD_SYSTEM_TARGET_WANTS = \
 	multi-user.target.wants \
 	local-fs.target.wants \
 	sysinit.target.wants
-#	busnames.target.wants \
 
 SYSTEMD_SYSTEM_TARGETS = \
 	basic.target \
@@ -93,7 +91,6 @@ SYSTEMD_SYSTEM_TARGETS = \
 	timers.target \
 	time-sync.target \
 	umount.target
-#	busnames.target \
 
 SYSTEMD_SYSTEM_SOCKETS = \
 	syslog.socket \
@@ -135,16 +132,14 @@ SYSTEMD_SYSTEM_SERVICES = \
 	systemd-journal-flush.service \
 	systemd-kexec.service \
 	systemd-machine-id-commit.service \
-	systemd-nspawn@.service \
 	systemd-poweroff.service \
 	systemd-reboot.service \
 	systemd-remount-fs.service \
 	systemd-shutdownd.service \
 	systemd-suspend.service \
 	systemd-sysctl.service \
+	systemd-sysusers.service \
 	systemd-update-done.service \
-	systemd-update-utmp-runlevel.service \
-	systemd-update-utmp.service \
 	user@.service
 
 SYSTEMD_SYSTEM_MOUNTS = \
@@ -155,18 +150,17 @@ SYSTEMD_SYSTEM_MOUNTS = \
 	sys-kernel-debug.mount \
 	tmp.mount
 
-SYSTEMD_UDEV_SYSTEM_SERVICES = \
+SYSTEMD_UDEVD_SYSTEM_SERVICES = \
 	initrd-udevadm-cleanup-db.service \
-	systemd-udevd.service \
-	systemd-udev-hwdb-update.service \
+	systemd-hwdb-update.service \
 	systemd-udev-settle.service \
 	systemd-udev-trigger.service
 
-SYSTEMD_UDEV_SYSTEM_SOCKETS = \
+SYSTEMD_UDEVD_SYSTEM_SOCKETS = \
 	systemd-udevd-control.socket \
 	systemd-udevd-kernel.socket
 
-SYSTEMD_UDEV_LIBS = \
+SYSTEMD_UDEVD_LIBS = \
 	accelerometer \
 	ata_id \
 	cdrom_id \
@@ -174,38 +168,3 @@ SYSTEMD_UDEV_LIBS = \
 	mtd_probe \
 	scsi_id \
 	v4l_id
-
-SYSTEMD_UDEV_RULES = \
-	42-usb-hid-pm.rules \
-	50-udev-default.rules \
-	60-cdrom_id.rules \
-	60-drm.rules \
-	60-keyboard.rules \
-	60-persistent-alsa.rules \
-	60-persistent-input.rules \
-	60-persistent-serial.rules \
-	60-persistent-storage.rules \
-	60-persistent-storage-tape.rules \
-	60-persistent-v4l.rules \
-	61-accelerometer.rules \
-	64-btrfs.rules \
-	75-net-description.rules \
-	75-probe_mtd.rules \
-	75-tty-description.rules \
-	78-sound-card.rules \
-	80-net-setup-link.rules \
-	95-udev-late.rules \
-	99-systemd.rules
-
-SYSTEMD_UDEV_HWDB = \
-	20-acpi-vendor.hwdb \
-	20-bluetooth-vendor-product.hwdb \
-	20-net-ifname.hwdb \
-	20-OUI.hwdb \
-	20-pci-classes.hwdb \
-	20-pci-vendor-model.hwdb \
-	20-sdio-classes.hwdb \
-	20-sdio-vendor-model.hwdb \
-	20-usb-classes.hwdb \
-	20-usb-vendor-model.hwdb \
-	60-keyboard.hwdb
