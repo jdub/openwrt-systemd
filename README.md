@@ -5,7 +5,7 @@ An experimental, unholy union of [systemd](http://www.freedesktop.org/wiki/Softw
 
 ## Requirements
 
-<img src=http://vocore.io/images/1412679596_head.sp1trans.png align=right hspace=15 vspace=15>
+<img src=http://vocore.io/images/1412416257_IMG_7891.jpg align=right hspace=15 vspace=15>
 
 - You must use eglibc as your C library, as systemd requires (e)glibc and will not work with uClibc!
 
