@@ -1,5 +1,6 @@
 # systemd for OpenWrt
 
+<img src=http://vocore.io/images/1412679596_head.sp1trans.png align=right hspace=15 vspace=15>
 
 An experimental, unholy union of systemd and OpenWrt. Yes, it runs on a [VoCore](http://vocore.io/), which is about the size of an American quarter.
 
