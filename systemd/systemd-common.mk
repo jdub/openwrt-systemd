@@ -50,7 +50,7 @@ SYSTEMD_SYSTEM_TARGET_WANTS = \
 SYSTEMD_SYSTEM_TARGETS = \
 	basic.target \
 	bluetooth.target \
-	ctrl-alt-delete.target \
+	ctrl-alt-del.target \
 	default.target \
 	emergency.target \
 	final.target \
