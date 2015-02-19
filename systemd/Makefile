@@ -225,10 +225,6 @@ define Package/systemd/install
 		$(PKG_INSTALL_DIR)/etc/systemd/system/getty.target.wants/getty@tty1.service \
 		$(1)/etc/systemd/system/getty.target.wants
 
-	ln -sf \
-		/usr/lib/systemd/system/multi-user.target \
-		$(1)/etc/systemd/system/default.target
-
 	$(INSTALL_DIR) $(1)/sbin
 	ln -sf \
 		/usr/lib/systemd/systemd \
@@ -239,6 +235,15 @@ define Package/systemd/install
 
 	$(INSTALL_DIR) $(1)/run
 	ln -sf /run $(1)/var/run
+
+	# FIXME: make DEFAULT_TARGET option
+	ln -sf \
+		/usr/lib/systemd/system/initrd.target \
+		$(1)/etc/systemd/system/default.target
+
+	# FIXME: ifeq ($(DEFAULT_TARGET),initrd)
+	touch $(1)/etc/initrd-release
+	$(INSTALL_DIR) $(1)/sysroot
 endef
 
 
