@@ -582,6 +582,11 @@ define Plugin/udevd/install
 		$(PKG_INSTALL_DIR)/usr/bin/udevadm \
 		$(1)/usr/bin
 
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) \
+		$(PKG_INSTALL_DIR)/usr/bin/systemd-hwdb \
+		$(1)/usr/bin
+
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) \
 		$(PKG_INSTALL_DIR)/usr/lib/libudev.so* \
