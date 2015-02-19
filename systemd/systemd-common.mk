@@ -116,7 +116,6 @@ SYSTEMD_SYSTEM_SERVICES = \
 	initrd-cleanup.service \
 	initrd-parse-etc.service \
 	initrd-switch-root.service \
-	ldconfig.service \
 	quotaon.service \
 	rc-local.service \
 	rescue.service \

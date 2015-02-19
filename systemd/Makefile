@@ -43,6 +43,7 @@ CONFIGURE_ARGS_EMBEDDED = \
 	--disable-firstboot \
 	--disable-hibernate \
 	--disable-importd \
+	--disable-ldconfig \
 	--disable-logind \
 	--disable-machined \
 	--disable-microhttpd \
