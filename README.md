@@ -34,7 +34,7 @@ make menuconfig
 
 - Under "C Library implementation", choose "eglibc".
 
-- At the top of the menu tree, under "Base system", you'll find "systemd" package!
+- At the top of the menu tree, under "Base system", you'll find the "systemd" package, and lots of goodies under it!
 
 
 ## Contributors
