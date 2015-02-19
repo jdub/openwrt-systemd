@@ -9,8 +9,10 @@ SYSTEMD_BIN = \
 	systemd-cgtop \
 	systemd-delta \
 	systemd-detect-virt \
+	systemd-escape \
 	systemd-machine-id-setup \
 	systemd-notify \
+	systemd-path \
 	systemd-run \
 	systemd-sysusers \
 	systemd-tty-ask-password-agent
@@ -24,13 +26,15 @@ SYSTEMD_LIB = \
 	systemd-fsck \
 	systemd-initctl \
 	systemd-journald \
+	systemd-machine-id-commit \
 	systemd-remount-fs \
 	systemd-reply-password \
 	systemd-shutdown \
 	systemd-shutdownd \
 	systemd-sleep \
 	systemd-socket-proxyd \
-	systemd-sysctl
+	systemd-sysctl \
+	systemd-update-done
 
 SYSTEMD_SYSTEM_TARGET_WANTS = \
 	sockets.target.wants \
@@ -46,6 +50,8 @@ SYSTEMD_SYSTEM_TARGET_WANTS = \
 SYSTEMD_SYSTEM_TARGETS = \
 	basic.target \
 	bluetooth.target \
+	ctrl-alt-delete.target \
+	default.target \
 	emergency.target \
 	final.target \
 	getty.target \
@@ -58,6 +64,7 @@ SYSTEMD_SYSTEM_TARGETS = \
 	kexec.target \
 	local-fs-pre.target \
 	local-fs.target \
+	machines.target \
 	multi-user.target \
 	network-online.target \
 	nss-lookup.target \
@@ -91,6 +98,10 @@ SYSTEMD_SYSTEM_TARGETS = \
 	timers.target \
 	time-sync.target \
 	umount.target
+
+SYSTEMD_SYSTEM_SLICES = \
+	-.slice \
+	system.slice
 
 SYSTEMD_SYSTEM_SOCKETS = \
 	syslog.socket \

@@ -184,6 +184,7 @@ define Package/systemd/install
 		$(addprefix $(PKG_INSTALL_DIR)/usr/lib/systemd/system/, \
 			$(SYSTEMD_SYSTEM_TARGET_WANTS) \
 			$(SYSTEMD_SYSTEM_TARGETS) \
+			$(SYSTEMD_SYSTEM_SLICES) \
 			$(SYSTEMD_SYSTEM_SOCKETS) \
 			$(SYSTEMD_SYSTEM_PATHS) \
 			$(SYSTEMD_SYSTEM_SERVICES) \
@@ -193,6 +194,7 @@ define Package/systemd/install
 	$(INSTALL_DIR) $(1)/usr/lib/systemd/system-shutdown
 	$(INSTALL_DIR) $(1)/usr/lib/systemd/system-sleep
 	$(INSTALL_DIR) $(1)/usr/lib/systemd/system-generators
+	$(INSTALL_DIR) $(1)/usr/lib/systemd/user-generators
 
 	$(INSTALL_BIN) \
 		$(PKG_INSTALL_DIR)/usr/lib/systemd/system-generators/systemd-* \
@@ -219,6 +221,9 @@ define Package/systemd/install
 
 	$(INSTALL_DIR) $(1)/var/log/journal
 	$(INSTALL_DIR) $(1)/etc/systemd/system/getty.target.wants
+	$(CP) \
+		$(PKG_INSTALL_DIR)/etc/systemd/system/getty.target.wants/getty@tty1.service \
+		$(1)/etc/systemd/system/getty.target.wants
 
 	ln -sf \
 		/usr/lib/systemd/system/multi-user.target \
