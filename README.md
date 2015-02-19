@@ -1,11 +1,11 @@
 # systemd for OpenWrt
 
-<img src=http://vocore.io/images/1412679596_head.sp1trans.png align=right hspace=15 vspace=15>
-
-An experimental, unholy union of systemd and OpenWrt. Yes, it runs on a [VoCore](http://vocore.io/), which is about the size of an American quarter.
+An experimental, unholy union of [systemd](http://www.freedesktop.org/wiki/Software/systemd/) and [OpenWrt](https://openwrt.org/). Yes, it runs on a [VoCore](http://vocore.io/), which is about the size of an American quarter.
 
 
 ## Requirements
+
+<img src=http://vocore.io/images/1412679596_head.sp1trans.png align=right hspace=15 vspace=15>
 
 - You must use eglibc as your C library, as systemd requires (e)glibc and will not work with uClibc!
 
