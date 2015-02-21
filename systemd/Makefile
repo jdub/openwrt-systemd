@@ -18,6 +18,7 @@ PKG_SOURCE_URL:=http://www.freedesktop.org/software/systemd/
 PKG_MD5SUM:=e0d6c9a4b4f69f66932d2230298c9a34
 
 PKG_BUILD_DEPENDS:=intltool/host gperf/host
+PKG_BUILD_PARALLEL:=1
 
 include systemd-common.mk
 include $(INCLUDE_DIR)/package.mk
