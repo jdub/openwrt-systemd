@@ -44,3 +44,4 @@ make menuconfig
 - Jeff [@jdub](https://github.com/jdub) Waugh, current maintainer
 - Gabe [@thagabe](https://github.com/thagabe) Rodriguez
 - Adam [@aport](https://github.com/aport) Porter, creator
+- Hugo [@hugoard](https://github.com/hugoard) Rodriguez 
